@@ -1,5 +1,7 @@
 NAME = libft.a
 
+BIN = bin
+
 SRCS = \
 	file/ft_putstr_fd.c \
 	file/ft_putendl_fd.c\
@@ -59,23 +61,67 @@ CC = cc
 
 CFLAGS = -Wall -Wextra -Werror
 
-OBJS = $(SRCS:%.c=%.o)
+# OBJS = $(SRCS:%.c=%.o)
+
+OBJS = $(addprefix $(BIN)/, $(SRCS:%.c=%.o))
 
 HEADER = libft.h
 
-all: $(NAME)
+SUBDIRS := file lst mem nbr is str get_next_line ft_printf
+
+BIN_SUBDIRS := $(addprefix $(BIN)/,$(SUBDIRS))
+
+# all: $(NAME)
+
+# $(NAME): $(OBJS) $(HEADER)
+
+# %.o: %.c
+# 	$(CC) $(CFLAGS) -c $< -o $@ 
+# 	ar -rc $(NAME) $@
+
+# clean:
+# 	rm -f $(OBJS)
+
+all: $(BIN) $(BIN_SUBDIRS) $(OBJS) $(NAME)
+
+$(BIN)/%.o: %.c
+	@$(CC) $(CFLAGS) -c $< -o $@  && printf "Compiling: $(notdir $<)\n"
 
 $(NAME): $(OBJS) $(HEADER)
+	@ar -rc $(NAME) $(OBJS)
 
-%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@ 
-	ar -rc $(NAME) $@
+$(BIN):
+	@mkdir -p $(BIN)
+
+$(BIN)/file:
+	@mkdir -p $(BIN)/file
+
+$(BIN)/lst:
+	@mkdir -p $(BIN)/lst
+
+$(BIN)/mem:
+	@mkdir -p $(BIN)/mem
+
+$(BIN)/nbr:
+	@mkdir -p $(BIN)/nbr
+
+$(BIN)/is:
+	@mkdir -p $(BIN)/is
+
+$(BIN)/str:
+	@mkdir -p $(BIN)/str
+
+$(BIN)/get_next_line:
+	@mkdir -p $(BIN)/get_next_line
+
+$(BIN)/ft_printf:
+	@mkdir -p $(BIN)/ft_printf
 
 clean:
-	rm -f $(OBJS)
+	@rm -rf $(BIN)
 
 fclean: clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
 
 re: fclean all
 

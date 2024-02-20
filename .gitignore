@@ -1,4 +1,5 @@
 # study/
 pipex
 /libft/*/*.o
+/libft/bin/
 /bin/
