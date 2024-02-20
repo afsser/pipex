@@ -5,8 +5,6 @@
 
 int	main(int argc, char **argv)
 {
-	char	**args;
-
 	// pid_t	pid;
 	// pid = fork();
 	// if (pid == -1)
@@ -22,16 +20,20 @@ int	main(int argc, char **argv)
 	// {
 	// 	ft_printf("This is the Child Process\n");
 	// }
-	args = ft_split(argv[1], ' ');
+
+
+	char	**args;
 	if (argc == 2) // deve ser 5
 	{
+		args = ft_split(argv[1], ' ');
 		execve("/bin/ls", args, NULL);
 	}
-	// correção de argumentos VVV
-		write(1, "error", 5);
+		// write(1, "error", 5);
 	
 
-	// ft_printf("ta funcionando %s\n", ft_strdup("sim"));
-	// ft_printf("5 + 5 = %d\n", ft_strlen("0123456789"));
+	ft_printf("ta funcionando %s\n", ft_strdup("sim"));
+	ft_printf("5 + 5 = %d\n", ft_strlen("0123456789"));
+	ft_printf("%c\n", ft_toupper('a'));
+	ft_printf("%s\n", ft_strjoin("hello ", "world"));
 	return (0);
 }

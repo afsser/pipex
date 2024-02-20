@@ -1,5 +1,11 @@
 # study/
+
+*.pdf
+
 pipex
-/libft/*/*.o
+
 /libft/bin/
+
+/libft/libft.a
+
 /bin/
