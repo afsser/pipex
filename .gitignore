@@ -1,5 +1,7 @@
 # study/
 
+/.study/*.out
+
 *.pdf
 
 pipex
