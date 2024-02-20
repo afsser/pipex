@@ -1,7 +1,8 @@
-#include <unistd.h>
+
+#include "pipex.h"
 
 #include <string.h>
-#include <stdlib.h>
+
 
 //   -------------  PASSAR ARGUMENTOS (COMANDO) (FLAGS) (AMBIENT VARIABLES)
 
