@@ -30,7 +30,7 @@ SRCS = \
 	is/ft_isalnum.c\
 	is/ft_isalpha.c \
 	is/ft_isascii.c\
-	\
+	str/ft_count_words.c\
 	str/ft_strjoin.c \
 	str/ft_strdup.c\
 	str/ft_tolower.c \
