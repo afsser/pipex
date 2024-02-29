@@ -6,7 +6,7 @@
 /*   By: fcaldas- <fcaldas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 16:14:11 by fcaldas-          #+#    #+#             */
-/*   Updated: 2024/02/29 15:47:53 by fcaldas-         ###   ########.fr       */
+/*   Updated: 2024/02/29 17:49:19 by fcaldas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 #define READ_BUFFER_SIZE 100
 
-int	main(int argc, char **argv)
+int	main(int argc, char **argv, char **envp)
 {
 	int		fd[2];
 	pid_t	pid;

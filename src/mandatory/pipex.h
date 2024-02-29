@@ -12,4 +12,22 @@
 # include <fcntl.h>  
 # include <stdlib.h>
 
+typedef struct s_pipex	t_pipex;
+struct					s_pipex
+{
+	int		nb_cmd;
+	int		nb_cmd_curr;
+	int		fd_inf;
+	int		fd_outf;
+	int		ac;
+	int		*fd;
+	char	**av;
+	char	**paths;
+	char	**paths_temp;
+	char	**envp;
+	char	**cmd;
+	pid_t	pid;
+	pid_t	pid_2;
+};
+
 #endif
