@@ -27,35 +27,37 @@ SRCS = \
 	nbr/ft_atoi.c \
 	nbr/ft_itoa.c \
 	\
-	is/ft_isprint.c\
+	is/ft_isprint.c \
 	is/ft_isdigit.c \
-	is/ft_isalnum.c\
+	is/ft_isalnum.c \
 	is/ft_isalpha.c \
-	is/ft_isascii.c\
-	str/ft_count_words.c\
+	is/ft_isascii.c \
+	\
+	str/ft_count_words.c \
 	str/ft_strjoin.c \
-	str/ft_strdup.c\
+	str/ft_strdup.c \
 	str/ft_tolower.c \
 	str/ft_strtrim.c \
 	str/ft_strlcat.c \
 	str/ft_substr.c \
 	str/ft_strlcpy.c \
-	str/ft_strlen.c\
+	str/ft_strlen.c \
 	str/ft_toupper.c \
 	str/ft_strmapi.c \
 	str/ft_split.c \
 	str/ft_strncmp.c \
-	str/ft_strchr.c\
+	str/ft_strchr.c \
 	str/ft_strnstr.c \
 	str/ft_strrchr.c \
 	str/ft_striteri.c \
 	\
 	get_next_line/get_next_line.c \
+	\
 	ft_printf/ft_printf.c \
+	\
 	ft_printf/ft_putnbr_base.c \
 	ft_printf/ft_printf_utils.c \
 	ft_printf/ft_printptr.c
-
 
 CC = cc
 
