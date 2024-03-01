@@ -30,6 +30,7 @@ struct					s_pipex
 	pid_t	pid_2;
 };
 
+void	ft_free(t_pipex *pipex);
 void	failure(char *error_msg, t_pipex *pipex, int flag);
 
 #endif
