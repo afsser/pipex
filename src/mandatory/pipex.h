@@ -17,8 +17,8 @@ struct					s_pipex
 {
 	int		nb_cmd;
 	int		nb_cmd_curr;
-	int		fd_inf;
-	int		fd_outf;
+	int		fd_in;
+	int		fd_out;
 	int		ac;
 	int		*fd;
 	char	**av;
@@ -29,5 +29,7 @@ struct					s_pipex
 	pid_t	pid;
 	pid_t	pid_2;
 };
+
+void	failure(char *error_msg, t_pipex *pipex, int flag);
 
 #endif
