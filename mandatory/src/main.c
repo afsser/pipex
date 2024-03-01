@@ -6,11 +6,11 @@
 /*   By: nasser <nasser@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 16:14:11 by fcaldas-          #+#    #+#             */
-/*   Updated: 2024/03/01 02:15:51 by nasser           ###   ########.fr       */
+/*   Updated: 2024/03/01 02:28:24 by nasser           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "../include/pipex.h"
 
 //   -------------  PASSAR ARGUMENTOS (COMANDO) (FLAGS) (AMBIENT VARIABLES)
 
@@ -47,9 +47,7 @@ int	main(int argc, char **argv, char **envp)
 	// char	buffer[READ_BUFFER_SIZE];
 	// ssize_t	bytesRead;
 	t_pipex	pipex;
-	int		i;
-
-	i = 0;
+	
 	pipex.envp = envp;
 	get_path(&pipex);
 	
@@ -104,6 +102,9 @@ int	main(int argc, char **argv, char **envp)
 	return (0);
 }
 
+	// int		i;
+
+	// i = 0;
 	// while (pipex.paths[i])
 	// {
 	// 	ft_printf("%s\n", pipex.paths[i]);

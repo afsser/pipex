@@ -2,15 +2,15 @@ NAME		:= pipex
 CC			:= gcc
 FLAGS		:= -Wall -Wextra -Werror -g3
 BIN			:= ./bin/
-SRCS		:= $(addprefix ./src/mandatory/, main.c errors.c)
-OBJS		:= $(patsubst ./src/mandatory/%.c,$(BIN)%.o,$(SRCS))
+SRCS		:= $(addprefix ./mandatory/src/, main.c errors.c)
+OBJS		:= $(patsubst ./mandatory/src/%.c,$(BIN)%.o,$(SRCS))
 LIB			:= ./libft/libft.a
-HEADERS		:= -I ./mandatory/pipex.h -I ./libft
+HEADERS		:= -I ./include/mandatory/pipex.h -I ./libft
 #NAME_BONUS	:= pipex_bonus
-#SRCS_BONUS	:= $(addprefix ./src/bonus/,)
+#SRCS_BONUS	:= $(addprefix ./bonus/src/,)
 #OBJS_BONUS	:= $(patsubst ./%.c,$(BIN_BONUS)%.o,$(SRCS_BONUS))
 #BIN_BONUS	:= ./bin/
-#HEADERS_BONUS:= -I ./bonus/pipex_bonus.h -I ./libft
+#HEADERS_BONUS:= -I ./bonus/include/pipex_bonus.h -I ./libft
 
 # ifdef WITH_BONUS
 # 	SRC = $(SRCS_BONUS)
@@ -25,7 +25,7 @@ all: libft/libft.a $(BIN) $(NAME)
 libft/libft.a:
 	@make -sC ./libft 
 
-$(BIN)%.o: ./src/mandatory/%.c
+$(BIN)%.o: ./mandatory/src/%.c
 	@$(CC) $(FLAGS) -o $@ -c $< $(HEADERS) && printf "Compiling: $(notdir $<)\n"
 
 $(NAME): $(OBJS)
@@ -34,7 +34,7 @@ $(NAME): $(OBJS)
 $(BIN):
 	@mkdir -p $(BIN)
 
-# $(BIN_BONUS)%.o: ./src/bonus/%.c
+# $(BIN_BONUS)%.o: ./bonus/src/%.c
 # 	@$(CC) $(FLAGS) -o $@ -c $< $(HEADERS_BONUS) && printf "Compiling: $(notdir $<)\n"
 
 # bonus:

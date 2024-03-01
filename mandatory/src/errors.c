@@ -1,4 +1,4 @@
-#include "pipex.h"
+#include "../include/pipex.h"
 
 void	failure(char *error_msg, t_pipex *pipex, int flag)
 {
