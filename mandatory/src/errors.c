@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   errors.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fcaldas- <fcaldas-@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/16 18:21:41 by fcaldas-          #+#    #+#             */
+/*   Updated: 2024/03/16 18:21:42 by fcaldas-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/pipex.h"
 
 void	ft_free(t_pipex *pipex)
@@ -28,9 +40,9 @@ void	ft_free(t_pipex *pipex)
 	}
 }
 
-void	failure(char *error_msg, t_pipex *pipex, int flag)
+void	failure(char *error_msg, t_pipex *pipex, int free_flag)
 {
-	if (flag == 1)
+	if (free_flag == 1)
 	{
 		close(pipex->fd_in);
 		close(pipex->fd_out);
@@ -38,6 +50,6 @@ void	failure(char *error_msg, t_pipex *pipex, int flag)
 		close(STDOUT_FILENO);
 		ft_free(pipex);
 	}
-	perror(error_msg);
+	ft_printf(error_msg);
 	exit(EXIT_FAILURE);
 }
