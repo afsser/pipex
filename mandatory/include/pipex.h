@@ -15,8 +15,6 @@
 typedef struct s_pipex	t_pipex;
 struct					s_pipex
 {
-	// int		nb_cmd;
-	// int		nb_cmd_curr;
 	int		fd_in;
 	int		fd_out;
 	int		ac;

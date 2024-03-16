@@ -6,7 +6,7 @@
 /*   By: fcaldas- <fcaldas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 18:21:33 by fcaldas-          #+#    #+#             */
-/*   Updated: 2024/03/16 20:42:36 by fcaldas-         ###   ########.fr       */
+/*   Updated: 2024/03/16 20:53:40 by fcaldas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ static void ft_command(t_pipex *pipex)
 		if (access(cmd, F_OK) == 0)
 		{
 			if (pipex->pid == 0)
-				write(1, &cmd, 10);
+				write(pipex->fd_out, cmd, 11);
 			if (pipex->pid > 0)
-				write(1, cmd, 10);
+				write(pipex->fd_out, cmd, 11);
 		}
 		// ======
 		
