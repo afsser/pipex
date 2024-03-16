@@ -6,7 +6,7 @@
 /*   By: fcaldas- <fcaldas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 16:14:11 by fcaldas-          #+#    #+#             */
-/*   Updated: 2024/03/16 19:59:08 by fcaldas-         ###   ########.fr       */
+/*   Updated: 2024/03/16 20:03:52 by fcaldas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	open_file(t_pipex *pipex)
 {
 	pipex->fd_in = open(pipex->av[1], O_RDONLY);
-	pipex->fd_out = open(pipex->av[4],
+	pipex->fd_out = open(pipex->av[pipex->ac - 1],
 			O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (pipex->fd_in < 0)
 	{
