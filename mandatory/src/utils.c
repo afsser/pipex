@@ -6,7 +6,7 @@
 /*   By: fcaldas- <fcaldas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 18:21:28 by fcaldas-          #+#    #+#             */
-/*   Updated: 2024/03/16 18:22:17 by fcaldas-         ###   ########.fr       */
+/*   Updated: 2024/03/16 19:40:51 by fcaldas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ static t_pipex	init(void)
 
 	pipex.fd_in = -1;
 	pipex.fd_out = -1;
-	pipex.nb_cmd = 0;
-	pipex.nb_cmd_curr = 2;
 	pipex.ac = -1;
 	pipex.av = NULL;
 	pipex.paths = NULL;
@@ -39,6 +37,50 @@ t_pipex fill_data(int argc, char **argv, char **envp, int *fd)
 	pipex.av = argv;
 	pipex.envp = envp;
 	pipex.fd = fd;
-	pipex.nb_cmd = argc - 3;
 	return (pipex);
+}
+
+void get_cmd(t_pipex *pipex)
+{
+	int		i;
+	char	*temp;
+
+	if (pipex->pid == 0)
+		pipex->cmd = ft_split(pipex->av[2], ' ');
+	else if (pipex->pid == 1)
+		pipex->cmd = ft_split(pipex->av[4], ' ');
+	if (!pipex->cmd)
+		failure("Error spliting cmd\n", pipex, 1);
+	i = -1;
+	temp = NULL;
+	while (pipex->cmd[++i])
+	{
+		temp = pipex->cmd[i];
+		pipex->cmd[i] = ft_strtrim(pipex->cmd[i], "'");
+		free(temp);
+	}
+}
+
+void get_path(t_pipex *pipex)
+{
+	int	i;
+
+	i = 0;
+	while (!ft_strnstr(pipex->envp[i], "PATH=", 5))
+		i++;
+	pipex->paths_temp = ft_split(pipex->envp[i] + 5, ':');
+	if (pipex->paths_temp == NULL)
+		failure("Pipex failed to split paths. ", pipex, 1);
+	i = 0;
+	while (pipex->paths_temp[i])
+		i++;
+	pipex->paths = malloc(sizeof(char *) * (i + 1));
+	i = -1;
+	while (pipex->paths_temp[++i])
+		pipex->paths[i] = ft_strjoin(pipex->paths_temp[i], "/");
+	pipex->paths[i] = NULL;
+	i = -1;
+	while (pipex->paths_temp[++i])
+		free(pipex->paths_temp[i]);
+	free(pipex->paths_temp);
 }

@@ -6,7 +6,7 @@
 /*   By: fcaldas- <fcaldas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 16:14:11 by fcaldas-          #+#    #+#             */
-/*   Updated: 2024/03/16 18:22:55 by fcaldas-         ###   ########.fr       */
+/*   Updated: 2024/03/16 19:23:18 by fcaldas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ int	main(int argc, char **argv, char **envp)
 	if (argc != 5)
 	{
 		failure("Args expected format:\n<infile> <cmd1> <cmd2> <outfile>\n", &pipex, 0);
-		// ft_printf("Args expected format:\n<infile> <cmd1> <cmd2> <outfile>\n");
 		exit(EXIT_FAILURE);
 	}
 	if (!envp)
