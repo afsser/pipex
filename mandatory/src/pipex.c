@@ -6,7 +6,7 @@
 /*   By: fcaldas- <fcaldas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 18:21:33 by fcaldas-          #+#    #+#             */
-/*   Updated: 2024/03/16 19:06:55 by fcaldas-         ###   ########.fr       */
+/*   Updated: 2024/03/16 19:51:37 by fcaldas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,12 @@ static void ft_command(t_pipex *pipex)
 {
 	int		i;
 	char	*cmd;
-
+	
+	// if (pipex->pid == 0)
+	// 	ft_printf("CHEGOU NA CRIANÇA\n");
+	// if (pipex->pid > 0)
+	// 	ft_printf("CHEGOU NO PAI\n");
+		
 	get_cmd(pipex);
 	i = 0;
 	while (pipex->paths[i])
@@ -59,8 +64,10 @@ void fork_init(t_pipex *pipex)
 	}
 	if (pipex->pid == 0)
 	{
+		// ft_printf("CHEGOU NA CRIANÇA\n");
 		child_process(pipex);
 	}
 	waitpid(pipex->pid, NULL, 0);
+	// ft_printf("CHEGOU NO PAI\n");
 	parent_process(pipex);
 }
