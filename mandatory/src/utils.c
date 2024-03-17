@@ -6,7 +6,7 @@
 /*   By: nasser <nasser@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 18:21:28 by fcaldas-          #+#    #+#             */
-/*   Updated: 2024/03/17 15:36:16 by nasser           ###   ########.fr       */
+/*   Updated: 2024/03/17 15:39:24 by nasser           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ t_pipex fill_data(int argc, char **argv, char **envp, int *fd)
 	return (pipex);
 }
 
-void get_cmd(t_pipex *pipex)
+void parse_cmd(t_pipex *pipex)
 {
 	int		i;
 	char	*temp;

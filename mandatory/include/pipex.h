@@ -32,7 +32,7 @@ struct					s_pipex
 
 t_pipex	fill_data(int argc, char **argv, char **envp, int *fd);
 void	get_path(t_pipex *pipex);
-void	get_cmd(t_pipex *pipex);
+void	parse_cmd(t_pipex *pipex);
 void	fork_init(t_pipex *pipex);
 void	ft_free(t_pipex *pipex);
 void	failure(char *error_msg, t_pipex *pipex, int free_flag);

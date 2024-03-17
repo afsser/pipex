@@ -6,7 +6,7 @@
 /*   By: nasser <nasser@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 18:21:33 by fcaldas-          #+#    #+#             */
-/*   Updated: 2024/03/17 15:35:59 by nasser           ###   ########.fr       */
+/*   Updated: 2024/03/17 15:39:59 by nasser           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void ft_command(t_pipex *pipex)
 	int		i;
 	char	*cmd;
 
-	get_cmd(pipex);
+	parse_cmd(pipex);
 	i = 0;
 	while (pipex->paths[i])
 	{
