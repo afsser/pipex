@@ -6,7 +6,7 @@
 /*   By: fcaldas- <fcaldas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 18:21:28 by fcaldas-          #+#    #+#             */
-/*   Updated: 2024/03/16 19:40:51 by fcaldas-         ###   ########.fr       */
+/*   Updated: 2024/03/16 21:47:13 by fcaldas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void get_cmd(t_pipex *pipex)
 
 	if (pipex->pid == 0)
 		pipex->cmd = ft_split(pipex->av[2], ' ');
-	else if (pipex->pid == 1)
+	else if (pipex->pid > 0)
 		pipex->cmd = ft_split(pipex->av[4], ' ');
 	if (!pipex->cmd)
 		failure("Error spliting cmd\n", pipex, 1);

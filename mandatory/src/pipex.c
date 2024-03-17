@@ -6,7 +6,7 @@
 /*   By: fcaldas- <fcaldas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 18:21:33 by fcaldas-          #+#    #+#             */
-/*   Updated: 2024/03/16 20:53:40 by fcaldas-         ###   ########.fr       */
+/*   Updated: 2024/03/16 21:47:45 by fcaldas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,26 @@ static void ft_command(t_pipex *pipex)
 	i = 0;
 	while (pipex->paths[i])
 	{
-		cmd = ft_strjoin(pipex->paths[i], (const char *)pipex->cmd[0]);
+		// if (pipex->pid == 0)
+		// 	write(pipex->fd_out, &pipex->cmd[0], 5);
+		// if (pipex->pid > 0)
+		// 	write(pipex->fd_out, &pipex->cmd[0], 14);
+
+		if (pipex->pid == 0)
+			cmd = ft_strjoin(pipex->paths[i], (const char *)pipex->cmd[0]);
+		if (pipex->pid > 0)
+			cmd = ft_strjoin(pipex->paths[i], (const char *)pipex->cmd[0]);
 		
-		// ======
-		if (access(cmd, F_OK) == 0)
-		{
-			if (pipex->pid == 0)
-				write(pipex->fd_out, cmd, 11);
-			if (pipex->pid > 0)
-				write(pipex->fd_out, cmd, 11);
-		}
-		// ======
+
+		// if (access(cmd, F_OK) == 0)
+		// {
+			// if (pipex->pid == 0)
+			// 	write(pipex->fd_out, cmd, 11);
+			// if (pipex->pid > 0)
+				// write(pipex->fd_out, "normal\n", 6);
+				// write(pipex->fd_out, cmd, 11);
+		// }
+
 		
 		if (access(cmd, F_OK) == 0
 			&& execve(cmd, pipex->cmd, pipex->envp) == -1)
@@ -53,6 +62,7 @@ static void ft_command(t_pipex *pipex)
 
 static void	child_process(t_pipex *pipex)
 {
+	// ft_printf("pid no processo criança: %d\n", pipex->pid);
 	dup2(pipex->fd[1], STDOUT_FILENO);
 	dup2(pipex->fd_in, STDIN_FILENO);
 	close(pipex->fd[0]);
@@ -61,9 +71,11 @@ static void	child_process(t_pipex *pipex)
 
 static void	parent_process(t_pipex *pipex)
 {
+	// ft_printf("pid no processo pai: %d\n", pipex->pid);
 	dup2(pipex->fd[0], STDIN_FILENO);
 	dup2(pipex->fd_out, STDOUT_FILENO);
 	close(pipex->fd[1]);
+	// write(pipex->fd_out, "normal\n", 6);
 	ft_command(pipex);
 }
 
@@ -76,6 +88,9 @@ void fork_init(t_pipex *pipex)
 	}
 	if (pipex->pid == 0)
 		child_process(pipex);
-	waitpid(pipex->pid, NULL, WNOHANG);
+	// ft_printf("passou do filho\n");
+	waitpid(pipex->pid, NULL, 0);
+	// ft_printf("passou do wait\n");
 	parent_process(pipex);
+	// ft_printf("passou do pai\n");
 }
