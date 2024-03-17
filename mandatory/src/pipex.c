@@ -6,7 +6,7 @@
 /*   By: nasser <nasser@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 18:21:33 by fcaldas-          #+#    #+#             */
-/*   Updated: 2024/03/17 17:38:36 by nasser           ###   ########.fr       */
+/*   Updated: 2024/03/17 19:13:42 by nasser           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ static void ft_command(t_pipex *pipex)
 static void	child1_process(t_pipex *pipex)
 {
 	dup2(pipex->fd[1], STDOUT_FILENO);
+	dup2(pipex->fd_in, STDIN_FILENO);
 	close(pipex->fd[0]);
 	close(pipex->fd[1]);
-	dup2(pipex->fd_in, STDIN_FILENO);
 	ft_command(pipex);
 }
 
@@ -48,9 +48,9 @@ static void	child2_process(t_pipex *pipex)
 {
 	pipex->curr_cmd++;
 	dup2(pipex->fd[0], STDIN_FILENO);
+	dup2(pipex->fd_out, STDOUT_FILENO);
 	close(pipex->fd[0]);
 	close(pipex->fd[1]);
-	dup2(pipex->fd_out, STDOUT_FILENO);
 	ft_command(pipex);
 }
 
@@ -62,15 +62,12 @@ void fork_init(t_pipex *pipex)
 		failure("Failed to fork\n", pipex, CLEAN);
 	}
 	if (pipex->pid1 == 0)
-		child1_process(pipex);
-	else
+	child1_process(pipex);
+	pipex->pid2 = fork();
+	if (pipex->pid2 == -1)
 	{
-		pipex->pid2 = fork();
-		if (pipex->pid2 == -1)
-		{
-			failure("Failed to fork\n", pipex, CLEAN);
-		}
-		if (pipex->pid2 == 0)
-			child2_process(pipex);
+		failure("Failed to fork\n", pipex, CLEAN);
 	}
+	if (pipex->pid2 == 0)
+		child2_process(pipex);
 }
