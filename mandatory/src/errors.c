@@ -6,7 +6,7 @@
 /*   By: nasser <nasser@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 18:21:41 by fcaldas-          #+#    #+#             */
-/*   Updated: 2024/03/17 15:35:03 by nasser           ###   ########.fr       */
+/*   Updated: 2024/03/17 19:00:20 by nasser           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void	failure(char *error_msg, t_pipex *pipex, int free_flag)
 		close(pipex->fd_out);
 		close(STDIN_FILENO);
 		close(STDOUT_FILENO);
+		close(STDERR_FILENO);
 		ft_free(pipex);
 	}
 	ft_printf(error_msg);

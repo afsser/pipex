@@ -6,7 +6,7 @@
 /*   By: nasser <nasser@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 16:14:11 by fcaldas-          #+#    #+#             */
-/*   Updated: 2024/03/17 17:13:16 by nasser           ###   ########.fr       */
+/*   Updated: 2024/03/17 19:01:33 by nasser           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,12 @@ int	main(int argc, char **argv, char **envp)
 	open_file(&pipex);
 	get_path(&pipex);
 	fork_init(&pipex);
+	close(fd[0]);
+	close(fd[1]);
 	waitpid(pipex.pid1, NULL, 0);
 	waitpid(pipex.pid2, NULL, 0);
+	close(pipex.fd_in);
+	close(pipex.fd_out);
 	ft_free(&pipex);
 	return (0);
 }

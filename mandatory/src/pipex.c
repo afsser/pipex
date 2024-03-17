@@ -6,7 +6,7 @@
 /*   By: nasser <nasser@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 18:21:33 by fcaldas-          #+#    #+#             */
-/*   Updated: 2024/03/17 17:16:49 by nasser           ###   ########.fr       */
+/*   Updated: 2024/03/17 17:38:36 by nasser           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,14 @@ void fork_init(t_pipex *pipex)
 	}
 	if (pipex->pid1 == 0)
 		child1_process(pipex);
-	pipex->pid2 = fork();
-	if (pipex->pid2 == -1)
+	else
 	{
-		failure("Failed to fork\n", pipex, CLEAN);
+		pipex->pid2 = fork();
+		if (pipex->pid2 == -1)
+		{
+			failure("Failed to fork\n", pipex, CLEAN);
+		}
+		if (pipex->pid2 == 0)
+			child2_process(pipex);
 	}
-	if (pipex->pid2 == 0)
-		child2_process(pipex);
 }
