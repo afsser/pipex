@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcaldas- <fcaldas-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nasser <nasser@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 16:14:11 by fcaldas-          #+#    #+#             */
-/*   Updated: 2024/03/16 20:03:52 by fcaldas-         ###   ########.fr       */
+/*   Updated: 2024/03/17 15:35:45 by nasser           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,14 @@ static void	open_file(t_pipex *pipex)
 			close(pipex->fd_out);
 		close(pipex->fd[0]);
 		close(pipex->fd[1]);
-		failure("Error while open infile\n", pipex, 1);
+		failure("Error while open infile\n", pipex, CLEAN);
 	}
 	if (pipex->fd_out < 0)
 	{
 		close(pipex->fd[0]);
 		close(pipex->fd[1]);
 		close(pipex->fd_in);
-		failure("Error while deal with outfile\n", pipex, 1);
+		failure("Error while deal with outfile\n", pipex, CLEAN);
 	}
 }
 
@@ -41,14 +41,14 @@ int	main(int argc, char **argv, char **envp)
 	
 	if (argc != 5)
 	{
-		failure("Args expected format:\n<infile> <cmd1> <cmd2> <outfile>\n", &pipex, 0);
+		failure("Args expected format:\n<infile> <cmd1> <cmd2> <outfile>\n", &pipex, END);
 		exit(EXIT_FAILURE);
 	}
 	if (!envp)
-		failure("Failed to get ENVP.", &pipex, 0);
+		failure("Failed to get ENVP.", &pipex, END);
 	if (pipe(fd) == -1)
 	{
-		failure("Pipex failed to execute pipe().", &pipex, 0);
+		failure("Pipex failed to execute pipe().", &pipex, END);
 		return (1);
 	}
 	pipex = fill_data(argc, argv, envp, fd);

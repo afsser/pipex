@@ -12,6 +12,9 @@
 # include <fcntl.h>  
 # include <stdlib.h>
 
+# define CLEAN	1
+# define END	0
+
 typedef struct s_pipex	t_pipex;
 struct					s_pipex
 {

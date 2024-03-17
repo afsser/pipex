@@ -6,7 +6,7 @@
 /*   By: nasser <nasser@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 18:21:33 by fcaldas-          #+#    #+#             */
-/*   Updated: 2024/03/17 15:31:35 by nasser           ###   ########.fr       */
+/*   Updated: 2024/03/17 15:35:59 by nasser           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,12 @@ static void ft_command(t_pipex *pipex)
 			&& execve(cmd, pipex->cmd, pipex->envp) == -1)
 		{
 			free(cmd);
-			failure("Error executing cmd\n", pipex, 1);
+			failure("Error executing cmd\n", pipex, CLEAN);
 		}
 		free(cmd);
 		i++;
 	}
-	failure("Error to find path\n", pipex, 1);
+	failure("Error to find path\n", pipex, CLEAN);
 }
 
 static void	child_process(t_pipex *pipex)
@@ -58,7 +58,7 @@ void fork_init(t_pipex *pipex)
 	pipex->pid = fork();
 	if (pipex->pid == -1)
 	{
-		failure("Failed to fork\n", pipex, 1);
+		failure("Failed to fork\n", pipex, CLEAN);
 	}
 	if (pipex->pid == 0)
 		child_process(pipex);

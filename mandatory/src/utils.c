@@ -6,7 +6,7 @@
 /*   By: nasser <nasser@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 18:21:28 by fcaldas-          #+#    #+#             */
-/*   Updated: 2024/03/17 15:06:31 by nasser           ###   ########.fr       */
+/*   Updated: 2024/03/17 15:36:16 by nasser           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void get_cmd(t_pipex *pipex)
 	else if (pipex->pid > 0)
 		pipex->cmd = ft_split(pipex->av[3], ' ');
 	if (!pipex->cmd)
-		failure("Error spliting cmd\n", pipex, 1);
+		failure("Error spliting cmd\n", pipex, CLEAN);
 	i = -1;
 	temp = NULL;
 	while (pipex->cmd[++i])
@@ -70,7 +70,7 @@ void get_path(t_pipex *pipex)
 		i++;
 	pipex->paths_temp = ft_split(pipex->envp[i] + 5, ':');
 	if (pipex->paths_temp == NULL)
-		failure("Pipex failed to split paths. ", pipex, 1);
+		failure("Pipex failed to split paths. ", pipex, CLEAN);
 	i = 0;
 	while (pipex->paths_temp[i])
 		i++;

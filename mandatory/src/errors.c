@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcaldas- <fcaldas-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nasser <nasser@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 18:21:41 by fcaldas-          #+#    #+#             */
-/*   Updated: 2024/03/16 18:21:42 by fcaldas-         ###   ########.fr       */
+/*   Updated: 2024/03/17 15:35:03 by nasser           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	ft_free(t_pipex *pipex)
 
 void	failure(char *error_msg, t_pipex *pipex, int free_flag)
 {
-	if (free_flag == 1)
+	if (free_flag == CLEAN)
 	{
 		close(pipex->fd_in);
 		close(pipex->fd_out);
