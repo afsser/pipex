@@ -6,7 +6,7 @@
 /*   By: nasser <nasser@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 18:21:33 by fcaldas-          #+#    #+#             */
-/*   Updated: 2024/03/17 15:39:59 by nasser           ###   ########.fr       */
+/*   Updated: 2024/03/17 17:16:49 by nasser           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,8 @@ static void ft_command(t_pipex *pipex)
 	i = 0;
 	while (pipex->paths[i])
 	{
-		if (pipex->pid == 0)
-			cmd = ft_strjoin(pipex->paths[i], (const char *)pipex->cmd[0]);
-		if (pipex->pid > 0)
-			cmd = ft_strjoin(pipex->paths[i], (const char *)pipex->cmd[0]);
+
+		cmd = ft_strjoin(pipex->paths[i], (const char *)pipex->cmd[0]);
 		if (access(cmd, F_OK) == 0
 			&& execve(cmd, pipex->cmd, pipex->envp) == -1)
 		{
@@ -37,31 +35,39 @@ static void ft_command(t_pipex *pipex)
 	failure("Error to find path\n", pipex, CLEAN);
 }
 
-static void	child_process(t_pipex *pipex)
+static void	child1_process(t_pipex *pipex)
 {
 	dup2(pipex->fd[1], STDOUT_FILENO);
-	dup2(pipex->fd_in, STDIN_FILENO);
 	close(pipex->fd[0]);
+	close(pipex->fd[1]);
+	dup2(pipex->fd_in, STDIN_FILENO);
 	ft_command(pipex);
 }
 
-static void	parent_process(t_pipex *pipex)
+static void	child2_process(t_pipex *pipex)
 {
+	pipex->curr_cmd++;
 	dup2(pipex->fd[0], STDIN_FILENO);
-	dup2(pipex->fd_out, STDOUT_FILENO);
+	close(pipex->fd[0]);
 	close(pipex->fd[1]);
+	dup2(pipex->fd_out, STDOUT_FILENO);
 	ft_command(pipex);
 }
 
 void fork_init(t_pipex *pipex)
 {
-	pipex->pid = fork();
-	if (pipex->pid == -1)
+	pipex->pid1 = fork();
+	if (pipex->pid1 == -1)
 	{
 		failure("Failed to fork\n", pipex, CLEAN);
 	}
-	if (pipex->pid == 0)
-		child_process(pipex);
-	waitpid(pipex->pid, NULL, 0);
-	parent_process(pipex);
+	if (pipex->pid1 == 0)
+		child1_process(pipex);
+	pipex->pid2 = fork();
+	if (pipex->pid2 == -1)
+	{
+		failure("Failed to fork\n", pipex, CLEAN);
+	}
+	if (pipex->pid2 == 0)
+		child2_process(pipex);
 }

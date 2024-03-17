@@ -18,6 +18,7 @@
 typedef struct s_pipex	t_pipex;
 struct					s_pipex
 {
+	int		curr_cmd;
 	int		fd_in;
 	int		fd_out;
 	int		ac;
@@ -27,7 +28,8 @@ struct					s_pipex
 	char	**paths_temp;
 	char	**envp;
 	char	**cmd;
-	pid_t	pid;
+	pid_t	pid1;
+	pid_t	pid2;
 };
 
 t_pipex	fill_data(int argc, char **argv, char **envp, int *fd);

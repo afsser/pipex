@@ -1,3 +1,14 @@
+.
+..
 bin
 bonus
+.git
+.gitignore
+infile
 libft
+Makefile
+mandatory
+outfile
+pipex
+.study
+.vscode

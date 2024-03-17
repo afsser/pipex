@@ -6,7 +6,7 @@
 /*   By: nasser <nasser@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 18:21:28 by fcaldas-          #+#    #+#             */
-/*   Updated: 2024/03/17 15:39:24 by nasser           ###   ########.fr       */
+/*   Updated: 2024/03/17 16:18:20 by nasser           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ static t_pipex	init(void)
 {
 	t_pipex	pipex;
 
+	pipex.curr_cmd = 2;
 	pipex.fd_in = -1;
 	pipex.fd_out = -1;
 	pipex.ac = -1;
@@ -45,10 +46,7 @@ void parse_cmd(t_pipex *pipex)
 	int		i;
 	char	*temp;
 
-	if (pipex->pid == 0)
-		pipex->cmd = ft_split(pipex->av[2], ' ');
-	else if (pipex->pid > 0)
-		pipex->cmd = ft_split(pipex->av[3], ' ');
+	pipex->cmd = ft_split(pipex->av[pipex->curr_cmd], ' ');
 	if (!pipex->cmd)
 		failure("Error spliting cmd\n", pipex, CLEAN);
 	i = -1;
