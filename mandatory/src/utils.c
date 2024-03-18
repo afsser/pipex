@@ -6,7 +6,7 @@
 /*   By: nasser <nasser@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 18:21:28 by fcaldas-          #+#    #+#             */
-/*   Updated: 2024/03/17 20:39:20 by nasser           ###   ########.fr       */
+/*   Updated: 2024/03/17 22:23:56 by nasser           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static t_pipex	init(void)
 	return (pipex);
 }
 
-t_pipex fill_data(int argc, char **argv, char **envp, int *fd)
+t_pipex	fill_data(int argc, char **argv, char **envp, int *fd)
 {
 	t_pipex	pipex;
 
@@ -41,7 +41,7 @@ t_pipex fill_data(int argc, char **argv, char **envp, int *fd)
 	return (pipex);
 }
 
-void parse_cmd(t_pipex *pipex)
+void	parse_cmd(t_pipex *pipex)
 {
 	int		i;
 	char	*temp;
@@ -59,7 +59,7 @@ void parse_cmd(t_pipex *pipex)
 	}
 }
 
-void get_path(t_pipex *pipex)
+void	get_path(t_pipex *pipex)
 {
 	int	i;
 

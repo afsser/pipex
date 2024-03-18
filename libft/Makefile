@@ -90,7 +90,7 @@ $(BIN)/%.o: %.c
 	@$(CC) $(CFLAGS) -c $< -o $@  && printf "Compiling: $(notdir $<)\n"
 
 $(NAME): $(OBJS) $(HEADER)
-	@ar -rc $(NAME) $(OBJS)
+	@ar -rc $(NAME) $(OBJS) && printf "Compiling: $(notdir $<)\n"
 
 $(BIN):
 	@mkdir -p $(BIN)

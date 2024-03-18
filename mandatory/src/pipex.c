@@ -6,13 +6,13 @@
 /*   By: nasser <nasser@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 18:21:33 by fcaldas-          #+#    #+#             */
-/*   Updated: 2024/03/17 19:13:42 by nasser           ###   ########.fr       */
+/*   Updated: 2024/03/17 22:23:24 by nasser           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pipex.h"
 
-static void ft_command(t_pipex *pipex)
+static void	ft_command(t_pipex *pipex)
 {
 	int		i;
 	char	*cmd;
@@ -21,7 +21,6 @@ static void ft_command(t_pipex *pipex)
 	i = 0;
 	while (pipex->paths[i])
 	{
-
 		cmd = ft_strjoin(pipex->paths[i], (const char *)pipex->cmd[0]);
 		if (access(cmd, F_OK) == 0
 			&& execve(cmd, pipex->cmd, pipex->envp) == -1)
@@ -35,7 +34,7 @@ static void ft_command(t_pipex *pipex)
 	failure("Error to find path\n", pipex, CLEAN);
 }
 
-static void	child1_process(t_pipex *pipex)
+static	void	child1_process(t_pipex *pipex)
 {
 	dup2(pipex->fd[1], STDOUT_FILENO);
 	dup2(pipex->fd_in, STDIN_FILENO);
@@ -44,7 +43,7 @@ static void	child1_process(t_pipex *pipex)
 	ft_command(pipex);
 }
 
-static void	child2_process(t_pipex *pipex)
+static	void	child2_process(t_pipex *pipex)
 {
 	pipex->curr_cmd++;
 	dup2(pipex->fd[0], STDIN_FILENO);
@@ -54,7 +53,7 @@ static void	child2_process(t_pipex *pipex)
 	ft_command(pipex);
 }
 
-void fork_init(t_pipex *pipex)
+void	fork_init(t_pipex *pipex)
 {
 	pipex->pid1 = fork();
 	if (pipex->pid1 == -1)
@@ -62,7 +61,7 @@ void fork_init(t_pipex *pipex)
 		failure("Failed to fork\n", pipex, CLEAN);
 	}
 	if (pipex->pid1 == 0)
-	child1_process(pipex);
+		child1_process(pipex);
 	pipex->pid2 = fork();
 	if (pipex->pid2 == -1)
 	{

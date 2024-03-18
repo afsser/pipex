@@ -6,7 +6,7 @@
 /*   By: nasser <nasser@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 16:14:11 by fcaldas-          #+#    #+#             */
-/*   Updated: 2024/03/17 21:14:23 by nasser           ###   ########.fr       */
+/*   Updated: 2024/03/17 22:21:37 by nasser           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,10 @@ int	main(int argc, char **argv, char **envp)
 {
 	int		fd[2];
 	t_pipex	pipex;
-	
+
 	if (argc != 5)
-		failure("Args expected format:\n<infile> <cmd1> <cmd2> <outfile>\n", &pipex, END);
+		failure("Args expected format:\n<infile> <cmd1> <cmd2> <outfile>\n",
+			&pipex, END);
 	if (!envp)
 		failure("Failed to get ENVP.", &pipex, END);
 	if (pipe(fd) == -1)
