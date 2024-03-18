@@ -6,7 +6,7 @@
 /*   By: nasser <nasser@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 18:21:28 by fcaldas-          #+#    #+#             */
-/*   Updated: 2024/03/17 16:18:20 by nasser           ###   ########.fr       */
+/*   Updated: 2024/03/17 20:39:20 by nasser           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void parse_cmd(t_pipex *pipex)
 	while (pipex->cmd[++i])
 	{
 		temp = pipex->cmd[i];
-		pipex->cmd[i] = ft_strtrim(pipex->cmd[i], "'");
+		pipex->cmd[i] = ft_strtrim(pipex->cmd[i], "\"");
 		free(temp);
 	}
 }
